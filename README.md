@@ -13,7 +13,7 @@ O arquivo assembler.py é o arquivo principal que chama todos os outros. Ele esp
 
 Exemplo de chamada: python assembler.py entrada_grande.txt
 
-A execução gera os arquivos: mer.txt contendo todos os mers, Eulerianos.txt contendo o caminho euleriano (se houver) e sequencia_reconstruida.txt contendo a sequência reconstruída.
+A execução gera os arquivos: mer.txt contendo todos os mers, DeBruijn.txt com o grafo sendo representado através de lista de adjacência, Eulerianos.txt contendo o caminho euleriano (se houver) e sequencia_reconstruida.txt contendo a sequência reconstruída.
 
 Esse código foi testado com o problema do Rosalind chamado "String Reconstruction from Read-Pairs Problem".
 

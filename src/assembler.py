@@ -3,6 +3,8 @@
 from kdmer import *
 from collections import defaultdict
 
+import sys
+
 class GrafoDeBruijn:
 
 	def __init__(self, kdmers, k, d):
@@ -248,19 +250,22 @@ class GrafoDeBruijn:
 
 
 
-# teste
-obj_fasta = ArquivoFasta("entrada_grande.txt")
-kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())
-grafo = GrafoDeBruijn(kdmer.getMers(), obj_fasta.getK(), obj_fasta.getD())
+if len(sys.argv) != 2:
+	print('\nExecute: python assembler.py <arquivo_de_entrada.txt>\n')
 
-# verifica se existe caminho euleriano
-if (grafo.existeEuleriano()):
-	# teste para verificar se as sequências batem
-	if (grafo.getSequencia() == obj_fasta.getSequencia()):
-		print("Sequência reconstruída com sucesso!")
-	else:
-		print("Falha: foi gerada uma sequência diferente da original.") 
-		print("Tamanho da sequência original: %d" % len(obj_fasta.getSequencia()))
-		print("Tamanho da sequência reconstruída: %d" % len(grafo.getSequencia()))
 else:
-	print("Não existe caminho euleriano!")
+	obj_fasta = ArquivoFasta(sys.argv[1])
+	kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())
+	grafo = GrafoDeBruijn(kdmer.getMers(), obj_fasta.getK(), obj_fasta.getD())
+
+	# verifica se existe caminho euleriano
+	if (grafo.existeEuleriano()):
+		# teste para verificar se as sequências batem
+		if (grafo.getSequencia() == obj_fasta.getSequencia()):
+			print("Sequência reconstruída com sucesso!")
+		else:
+			print("Falha: foi gerada uma sequência diferente da original.") 
+			print("Tamanho da sequência original: %d" % len(obj_fasta.getSequencia()))
+			print("Tamanho da sequência reconstruída: %d" % len(grafo.getSequencia()))
+	else:
+		print("Não existe caminho euleriano!")
