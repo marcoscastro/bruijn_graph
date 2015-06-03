@@ -1,4 +1,4 @@
-# De Bruijn graph
+# De Bruijn Graph
 Implementação do grafo de Bruijn para aplicar na remontagem de genoma.
 
 A implementação foi feita em Python, funciona tanto em Python 2.x como 3.x.
