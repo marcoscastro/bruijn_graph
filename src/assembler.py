@@ -249,22 +249,30 @@ class GrafoDeBruijn:
 		return self.sequencia
 
 
+# obtém a quantidade de argumentos
+len_args = len(sys.argv)
 
-if len(sys.argv) != 2:
+if len_args != 2 and len_args != 3:
 	print('\nExecute: python assembler.py <arquivo_de_entrada>\n')
 else:
-	obj_fasta = ArquivoFasta(sys.argv[1])
-	kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())
-	grafo = GrafoDeBruijn(kdmer.getMers(), obj_fasta.getK(), obj_fasta.getD())
+	if len_args == 2: # entrada normal do programa
+		obj_fasta = ArquivoFasta(sys.argv[1])
+		kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())
+		grafo = GrafoDeBruijn(kdmer.getMers(), obj_fasta.getK(), obj_fasta.getD())
 
-	# verifica se existe caminho euleriano
-	if (grafo.existeEuleriano()):
-		# teste para verificar se as sequências batem
-		if (grafo.getSequencia() == obj_fasta.getSequencia()):
-			print("Sequência reconstruída com sucesso!")
+		# verifica se existe caminho euleriano
+		if (grafo.existeEuleriano()):
+			# teste para verificar se as sequências batem
+			if (grafo.getSequencia() == obj_fasta.getSequencia()):
+				print("Sequência reconstruída com sucesso!")
+			else:
+				print("Falha: foi gerada uma sequência diferente da original.") 
+				print("Tamanho da sequência original: %d" % len(obj_fasta.getSequencia()))
+				print("Tamanho da sequência reconstruída: %d" % len(grafo.getSequencia()))
 		else:
-			print("Falha: foi gerada uma sequência diferente da original.") 
-			print("Tamanho da sequência original: %d" % len(obj_fasta.getSequencia()))
-			print("Tamanho da sequência reconstruída: %d" % len(grafo.getSequencia()))
-	else:
-		print("Não existe caminho euleriano!")
+			print("Não existe caminho euleriano!")
+	else: # entrada do problema do Rosalind:
+		if sys.argv[2] == 'rosalind':
+
+		else:
+			print('\nExecute: python assembler.py <arquivo_rosalind> rosalind\n')
