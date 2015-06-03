@@ -9,7 +9,7 @@ O arquivo fasta.py ler um arquivo no formato FASTA.
 
 O arquivo kdmer.py separa todos os (k,d)-mers retornando uma lista de mers.
 
-O arquivo assembler.py é o arquivo principal que chama todos os outros. Ele espera um parâmetro que é o caminho do arquivo de entrada. Exemplos com o formato desse arquivo de entrada encontram-se na pasta "entradas" cujos nomes são: entrada_grande e entrada_pequena. São arquivos onde a primeira linha tem-se os parâmetros "k" e "d" e a segunda linha possui a sequência que será remontada.
+O arquivo assembler.py é o arquivo principal que chama todos os outros. Ele espera um parâmetro que é o caminho do arquivo de entrada. Exemplos com o formato desse arquivo de entrada encontram-se na pasta "entradas" cujos nomes são "entrada1" e "entrada2". São arquivos onde a primeira linha tem-se os parâmetros "k" e "d" e a segunda linha possui a sequência que será remontada.
 
 Todos os arquivos de código estão devidamente comentados (em português).
 
@@ -30,7 +30,7 @@ O problema do Rosalind já fornece os (k,d)-mers. Para utilizar o programa para 
 
 python assembler.py arquivo_rosalind rosalind
 
-Esse "arquivo_rosalind" espera um arquivo no formato de entrada do problema do Rosalind. Um exemplo desse formato encontra-se na pasta "entradas" com o nome "rosalind".
+Esse "arquivo_rosalind" espera um arquivo no formato de entrada do problema do Rosalind. Exemplos desse formato encontra-se na pasta "entradas" com o nome "entrada_rosalind1" e "entrada_rosalind2".
 
 A execução acima gerará apenas o arquivo "sequencia_reconstruida.txt"
 

@@ -273,6 +273,6 @@ else:
 			print("Não existe caminho euleriano!")
 	else: # entrada do problema do Rosalind:
 		if sys.argv[2] == 'rosalind':
-
+			
 		else:
 			print('\nExecute: python assembler.py <arquivo_rosalind> rosalind\n')
