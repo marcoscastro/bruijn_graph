@@ -13,7 +13,9 @@ O arquivo assembler.py é o arquivo principal que chama todos os outros. Ele esp
 
 Todos os arquivos de código estão devidamente comentados (em português).
 
-Exemplo de chamada: python assembler.py entrada_grande
+Exemplo de chamada: python assembler.py <arquivo_de_entrada>
+
+Onde <arquivo_de_entrada> é o caminho para o arquivo de entrada.
 
 A execução gera os arquivos: 
 
