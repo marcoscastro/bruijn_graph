@@ -22,8 +22,6 @@ DeBruijn.txt com o grafo sendo representado através de lista de adjacência</br
 Eulerianos.txt contendo o caminho euleriano (se houver)</br>
 sequencia_reconstruida.txt contendo a sequência reconstruída
 
-Esse código foi testado com o problema do Rosalind chamado "String Reconstruction from Read-Pairs Problem":</br>
-
-[http://rosalind.info/problems/4i/](http://rosalind.info/problems/4i/)
+Esse código foi testado com o problema do Rosalind chamado "String Reconstruction from Read-Pairs Problem": [http://rosalind.info/problems/4i/](http://rosalind.info/problems/4i/)
 
 Os arquivos utilizados como referência estão na pasta "referencias".
