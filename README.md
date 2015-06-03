@@ -15,7 +15,7 @@ Todos os arquivos de código estão devidamente comentados (em português).
 
 Exemplo de chamada: python assembler.py arquivo_de_entrada
 
-Onde <arquivo_de_entrada> é o caminho para o arquivo de entrada.
+Onde arquivo_de_entrada é o caminho para o arquivo de entrada.
 
 A execução gera os arquivos: 
 
