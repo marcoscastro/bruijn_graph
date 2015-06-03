@@ -245,7 +245,7 @@ class GrafoDeBruijn:
 			# obtém toda a segunda metade da última aresta
 			# essa segunda metade já é obtida quando k < d
 			self.sequencia += arestas[-1][self.k:]
-
+			
 		# escrevendo a sequência reconstruída no arquivo
 		arq = open('sequencia_reconstruida.txt', 'w')
 		arq.write(self.sequencia)
