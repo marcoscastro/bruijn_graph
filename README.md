@@ -15,9 +15,9 @@ Exemplo de chamada: python assembler.py entrada_grande.txt
 
 A execução gera os arquivos: 
 
-kdmers.txt contendo todos os kdmers
-DeBruijn.txt com o grafo sendo representado através de lista de adjacência
-Eulerianos.txt contendo o caminho euleriano (se houver)
+kdmers.txt contendo todos os kdmers</br>
+DeBruijn.txt com o grafo sendo representado através de lista de adjacência</br>
+Eulerianos.txt contendo o caminho euleriano (se houver)</br>
 sequencia_reconstruida.txt contendo a sequência reconstruída
 
 Esse código foi testado com o problema do Rosalind chamado "String Reconstruction from Read-Pairs Problem".
