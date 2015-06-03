@@ -7,10 +7,11 @@ import sys
 
 class GrafoDeBruijn:
 
-	def __init__(self, kdmers, k, d):
+	def __init__(self, kdmers, k, d, rosalind=False):
 		self.kdmers = kdmers
 		self.k = int(k)
 		self.d = int(d)
+		self.rosalind = rosalind
 		self.construirGrafo()
 
 	def construirGrafo(self):
@@ -67,10 +68,10 @@ class GrafoDeBruijn:
 				lista_adj += vertice + " -> "
 			lista_adj += "\n"
 
-		# grava no arquivo
-		arq = open("DeBruijn.txt", "w")
-		arq.write(lista_adj)
-		arq.close()
+		if not self.rosalind: # grava no arquivo
+			arq = open('DeBruijn.txt', 'w')
+			arq.write(lista_adj)
+			arq.close()
 
 	# função que retorna o dicionário que representa a lista de adjacência
 	def getListaAdjacencia(self):
@@ -195,9 +196,11 @@ class GrafoDeBruijn:
 			for i in range(1, tam_caminho - 1):
 				caminho_euleriano += " -> " + self.circuito[i]
 			caminho_euleriano += " -> " + self.circuito[tam_caminho - 1]
-			arq = open("Eulerianos.txt", "w")
-			arq.write(caminho_euleriano)
-			arq.close()
+
+			if not self.rosalind: # grava no arquivo
+				arq = open('Eulerianos.txt', 'w')
+				arq.write(caminho_euleriano)
+				arq.close()
 
 			# chama a função para reconstruir a sequência
 			self.reconstruirSequencia()
@@ -209,7 +212,7 @@ class GrafoDeBruijn:
 		# obtém todas as arestas
 		arestas, tam_circuito = [], len(self.circuito) 
 		# obtém todas as arestas para poder remontar a sequência
-		for i in range(0, tam_circuito):
+		for i in range(tam_circuito):
 			if(i < tam_circuito - 1):
 				chave = self.circuito[i] + self.circuito[i + 1]
 				arestas.append(self.dict_arestas[chave])
@@ -218,20 +221,33 @@ class GrafoDeBruijn:
 		len_arestas = len(arestas)
 
 		# obtém a string até primeira metade da aresta (isso só vale para a primeira)
-		self.sequencia = arestas[0][0:self.k]
+		self.sequencia = arestas[0][:self.k]
+
+		# sufixos utilizados na reconstrução da sequência
+		sufixos = ''
 
 		# a partir da segunda, obtém somente o último caractere da primeira metade da aresta
 		for i in range(1, len_arestas):
-			self.sequencia += arestas[i][0:self.k][-1]
 
-		# acessa a aresta (len_arestas - self.d - 1)
-		self.sequencia += arestas[len_arestas - self.d - 1][self.k:self.k + self.d]
+			if i == (len_arestas - self.d - 1):
+				# acessa a aresta (len_arestas - self.d - 1)
+				sufixos += arestas[len_arestas - self.d - 1][self.k:self.k + self.d]
+			if self.k < self.d: # caso especial: k < d
+				# a partir de uma determinada posição, pega o último caractere da segunda metade (sufixo) da aresta
+				if i > (len_arestas - self.d - 1):
+					sufixos += arestas[i][-1]
+			# obtém somente o último caractere da primeira metade (prefixo) da aresta
+			self.sequencia += arestas[i][:self.k][-1]
 
-		# obtém toda a segunda metade da última aresta
-		self.sequencia += arestas[-1][self.k:]
+		self.sequencia += sufixos
+
+		if self.k >= self.d:
+			# obtém toda a segunda metade da última aresta
+			# essa segunda metade já é obtida quando k < d
+			self.sequencia += arestas[-1][self.k:]
 
 		# escrevendo a sequência reconstruída no arquivo
-		arq = open("sequencia_reconstruida.txt", "w")
+		arq = open('sequencia_reconstruida.txt', 'w')
 		arq.write(self.sequencia)
 		arq.close()
 
@@ -253,26 +269,57 @@ class GrafoDeBruijn:
 len_args = len(sys.argv)
 
 if len_args != 2 and len_args != 3:
-	print('\nExecute: python assembler.py <arquivo_de_entrada>\n')
+	print('\nExecute:\n\tpython assembler.py <arquivo_de_entrada>\n')
 else:
 	if len_args == 2: # entrada normal do programa
-		obj_fasta = ArquivoFasta(sys.argv[1])
-		kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())
-		grafo = GrafoDeBruijn(kdmer.getMers(), obj_fasta.getK(), obj_fasta.getD())
+		try:
+			obj_fasta = ArquivoFasta(sys.argv[1])
+			kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())
+			grafo = GrafoDeBruijn(kdmer.getMers(), obj_fasta.getK(), obj_fasta.getD())
 
-		# verifica se existe caminho euleriano
-		if (grafo.existeEuleriano()):
-			# teste para verificar se as sequências batem
-			if (grafo.getSequencia() == obj_fasta.getSequencia()):
-				print("Sequência reconstruída com sucesso!")
+			# verifica se existe caminho euleriano
+			if (grafo.existeEuleriano()):
+				# teste para verificar se as sequências batem
+				if (grafo.getSequencia() == obj_fasta.getSequencia()):
+					print('\nSequência reconstruída com sucesso!\n\nForam gerados os arquivos:\n\t DeBruijn.txt, Eulerianos.txt, kdmers.txt, sequencia_reconstruida.txt\n')
+				else:
+					print('Falha: foi gerada uma sequência diferente da original.') 
+					print('Tamanho da sequência original: %d' % len(obj_fasta.getSequencia()))
+					print('Tamanho da sequência reconstruída: %d' % len(grafo.getSequencia()))
 			else:
-				print("Falha: foi gerada uma sequência diferente da original.") 
-				print("Tamanho da sequência original: %d" % len(obj_fasta.getSequencia()))
-				print("Tamanho da sequência reconstruída: %d" % len(grafo.getSequencia()))
-		else:
-			print("Não existe caminho euleriano!")
+				print('Não existe caminho euleriano!')
+		except:
+			print('\nErro: verifique se o caminho do arquivo existe!\n')
 	else: # entrada do problema do Rosalind:
 		if sys.argv[2] == 'rosalind':
-			
+			try:
+				# lê o arquivo no formato do Rosalind
+				arquivo = open(sys.argv[1], 'r')
+
+				# lê todas as linhas do arquivo
+				linhas = arquivo.readlines()
+
+				# obtém o "k" e o "d"
+				k, d = linhas[0].replace('\n', '').split(' ')
+
+				# obtém a quantidade de linhas
+				len_linhas = len(linhas)
+
+				# no formato do Rosalind os kdmers já são fornecidos (não precisa gerá-los)
+				kdmers = []
+
+				# obtém todos os kdmers
+				for i in range(1, len_linhas):
+					mer1, mer2 = linhas[i].replace('\n', '').split('|')
+					kdmers.append((mer1, mer2))
+
+				grafo = GrafoDeBruijn(kdmers, k, d, rosalind=True)
+
+				print('\nFoi gerado o arquivo: sequencia_reconstruida.txt\n')
+
+				# fecha o arquivo
+				arquivo.close()
+			except:
+				print('\nErro: verifique se o caminho do arquivo existe!\n')
 		else:
-			print('\nExecute: python assembler.py <arquivo_rosalind> rosalind\n')
+			print('\nExecute:\n\tpython assembler.py <arquivo_rosalind> rosalind\n')
