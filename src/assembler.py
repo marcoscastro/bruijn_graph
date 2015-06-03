@@ -251,8 +251,7 @@ class GrafoDeBruijn:
 
 
 if len(sys.argv) != 2:
-	print('\nExecute: python assembler.py <arquivo_de_entrada.txt>\n')
-
+	print('\nExecute: python assembler.py <arquivo_de_entrada>\n')
 else:
 	obj_fasta = ArquivoFasta(sys.argv[1])
 	kdmer = KDMer(obj_fasta.getSequencia(), obj_fasta.getK(), obj_fasta.getD())

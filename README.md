@@ -11,7 +11,9 @@ O arquivo kdmer.py separa todos os kdmers retornando uma lista de mers.
 
 O arquivo assembler.py é o arquivo principal que chama todos os outros. Ele espera que um parâmetro que é o arquivo de entrada. Exemplos com o formato do arquivo encontram-se na pasta "entradas".
 
-Exemplo de chamada: python assembler.py entrada_grande.txt
+Todos os arquivos de código estão devidamente comentados (em português).
+
+Exemplo de chamada: python assembler.py entrada_grande
 
 A execução gera os arquivos: 
 
