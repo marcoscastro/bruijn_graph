@@ -20,7 +20,7 @@ class KDMer:
 		self.lista.sort()
 
 		# escrevedo os pares no arquivo
-		arq = open("k" + K + "d" + D + "mer.txt", "w")
+		arq = open("kdmers.txt", "w")
 		for par in self.lista:
 			arq.write(par[0] + " | " + par[1] + "\n")
 		arq.close()
