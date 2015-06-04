@@ -3,6 +3,12 @@ Implementação do grafo de Bruijn para aplicar na remontagem de genoma.
 
 A implementação foi feita em Python, funciona tanto em Python 2.x como 3.x.
 
+Existem duas implementações: uma está na pasta "src" e outra está na pasta "old_src".
+
+A implementação que está na pasta "old_src" é uma implementação antiga que não está otimizada e também não aceita a passagem de parâmetros, o arquivo que deve ser executado/modificado é o "main.py".
+
+Já a implementação que está na pasta "src" é uma implementação mais nova e otimizada que aceita parâmetros. Aconselho a utilizar ela, as explicações a seguir se baseiam nela.
+
 O código da implementação é composto por três arquivos: fasta.py, kdmer.py, assembler.py.
 
 O arquivo fasta.py ler um arquivo no formato FASTA.
