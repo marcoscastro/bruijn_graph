@@ -36,10 +36,10 @@ O problema do Rosalind já fornece os (k,d)-mers. Para utilizar o programa para 
 
 python assembler.py arquivo_rosalind rosalind
 
-Esse "arquivo_rosalind" espera um arquivo no formato de entrada do problema do Rosalind. Exemplos desse formato encontra-se na pasta "entradas" com o nome "entrada_rosalind1" e "entrada_rosalind2".
+Esse "arquivo_rosalind" espera um arquivo no formato de entrada do problema do Rosalind. Exemplos desse formato encontram-se na pasta "entradas" com o nome "entrada_rosalind1" e "entrada_rosalind2".
 
 A execução com o parâmetro "rosalind" gerará apenas o arquivo "sequencia_reconstruida.txt".
 
-Todos os arquivos com terminação "txt" são ignorados para no repositório.
+Todos os arquivos com terminação ".txt" são ignorados no repositório.
 
 Os arquivos utilizados como referência estão na pasta "referencias".
